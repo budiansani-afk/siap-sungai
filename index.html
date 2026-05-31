@@ -1,0 +1,411 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>SIAP-SUNGAI | Sistem Informasi Administrasi Pertanahan Normalisasi Sungai</title>
+    <!-- Tailwind CSS + Font Awesome + Google Fonts (Inter) -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        siap: {
+                            blue: '#a3c4f3',
+                            pink: '#f9c6d9',
+                            green: '#c5e0b4',
+                            yellow: '#ffe5b4',
+                            purple: '#d9c2f0',
+                            cream: '#fff9ef',
+                            dark: '#2c3e4e'
+                        }
+                    },
+                    backgroundImage: {
+                        'hero-sungai': 'linear-gradient(135deg, #fff9ef 0%, #fce4ec 45%, #e2f0fa 100%)',
+                        'card-grad': 'linear-gradient(112deg, #ffffff 0%, #fef9e6 100%)'
+                    }
+                }
+            }
+        }
+    </script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        * { font-family: 'Inter', sans-serif; }
+        html { scroll-behavior: smooth; }
+        body { background-color: #fef9e6; color: #2c3e4e; }
+        .hero-gradient {
+            background: linear-gradient(125deg, #fff9ef 0%, #fce4ec 30%, #d9eefa 100%);
+        }
+        .feature-card-siap {
+            transition: all 0.3s cubic-bezier(0.2, 0.9, 0.4, 1.1);
+            background: rgba(255, 255, 255, 0.85);
+            backdrop-filter: blur(2px);
+            border: 1px solid rgba(255, 255, 255, 0.7);
+            box-shadow: 0 8px 20px -12px rgba(0, 0, 0, 0.08);
+        }
+        .feature-card-siap:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 24px 36px -16px rgba(0, 0, 0, 0.2);
+            background: white;
+        }
+        .btn-gradient-primary {
+            background: linear-gradient(95deg, #a3c4f3 0%, #c5e0b4 100%);
+            color: #1e3a5f;
+            font-weight: 700;
+            transition: all 0.2s;
+        }
+        .btn-gradient-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px -8px #a3c4f3;
+        }
+        .btn-outline-siap {
+            background: transparent;
+            border: 1.5px solid #a3c4f3;
+            color: #2c3e4e;
+            transition: all 0.2s;
+        }
+        .btn-outline-siap:hover {
+            background: rgba(163, 196, 243, 0.2);
+            transform: translateY(-2px);
+            border-color: #c5e0b4;
+        }
+        .section-badge {
+            background: #ffe5b4;
+            color: #7c5e10;
+            border-radius: 999px;
+            padding: 0.25rem 1rem;
+            display: inline-block;
+            font-weight: 600;
+            font-size: 0.8rem;
+        }
+        .mockup-card {
+            background: rgba(255,255,240,0.7);
+            border-radius: 2rem;
+            box-shadow: 0 20px 35px -12px rgba(0,0,0,0.1);
+            backdrop-filter: blur(4px);
+        }
+        .logo-icon {
+            width: 56px;
+            height: 56px;
+            background: #c5e0b4;
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 6px 12px -8px rgba(0,0,0,0.2);
+            overflow: hidden;
+        }
+        .logo-icon img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        .stat-number {
+            font-size: 2rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, #2c3e4e, #0f5c6e);
+            background-clip: text;
+            -webkit-background-clip: text;
+            color: transparent;
+        }
+        .brand-wrapper {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+        .title-sub {
+            line-height: 1.2;
+            display: flex;
+            flex-direction: column;
+        }
+        .main-title {
+            font-size: 1.5rem;
+            font-weight: 800;
+            letter-spacing: -0.02em;
+        }
+        /* Dua baris subtitle dengan huruf kapital semua */
+        .subtitle-line {
+            font-size: 0.65rem;
+            font-weight: 700;
+            letter-spacing: 0.3px;
+            color: #2c5e2a;
+            text-transform: uppercase;
+            white-space: nowrap;
+        }
+        @media (min-width: 768px) {
+            .subtitle-line {
+                font-size: 0.7rem;
+            }
+        }
+        /* Scroll margin untuk fixed navbar */
+        #home, #tentang, #fitur, #demo {
+            scroll-margin-top: 85px;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- NAVBAR dengan dua baris subtitle kapital -->
+    <nav class="fixed top-0 w-full bg-white/90 backdrop-blur-md shadow-sm z-50 border-b border-gray-200/60 transition-all">
+        <div class="container mx-auto px-6 py-3 flex justify-between items-center flex-wrap">
+            <div class="brand-wrapper">
+                <div class="logo-icon">
+                    <img src="https://res.cloudinary.com/de4prnqa4/image/upload/v1780235014/logo_app_sungai_rcujav.jpg" alt="Logo SIAP-SUNGAI">
+                </div>
+                <div class="title-sub">
+                    <div class="main-title text-siap-dark">SIAP<span class="text-emerald-600">-SUNGAI</span></div>
+                    <div class="subtitle-line">SISTEM INFORMASI ADMINISTRASI PERTANAHAN</div>
+                    <div class="subtitle-line">NORMALISASI SUNGAI</div>
+                </div>
+            </div>
+            <div class="hidden md:flex items-center gap-6 font-medium">
+                <a href="#home" class="hover:text-emerald-600 font-bold transition">Beranda</a>
+                <a href="#tentang" class="hover:text-emerald-600 font-bold transition">Tentang</a>
+                <a href="#fitur" class="hover:text-emerald-600 font-bold transition">Fitur Unggulan</a>
+                <a href="#demo" class="hover:text-emerald-600 font-bold transition">Pratinjau</a>
+            </div>
+            <div class="flex items-center gap-3">
+                <a href="aplikasi_siap_sungai.html" target="_blank" class="hidden md:inline-block btn-gradient-primary px-5 py-2.5 rounded-full text-sm shadow-md transition">Akses Aplikasi →</a>
+                <button id="mobileMenuBtn" class="md:hidden text-3xl text-gray-700"><i class="fas fa-bars"></i></button>
+            </div>
+        </div>
+        <!-- Mobile menu -->
+        <div id="mobileMenu" class="hidden md:hidden bg-white/95 backdrop-blur-md px-6 pb-5 flex flex-col gap-3 border-t border-gray-100">
+            <a href="#home" class="py-2 font-medium hover:text-emerald-600">Beranda</a>
+            <a href="#tentang" class="py-2 font-medium hover:text-emerald-600">Tentang</a>
+            <a href="#fitur" class="py-2 font-medium hover:text-emerald-600">Fitur Unggulan</a>
+            <a href="#demo" class="py-2 font-medium hover:text-emerald-600">Pratinjau</a>
+            <a href="aplikasi_siap_sungai.html" target="_blank" class="btn-gradient-primary text-center py-2 rounded-full font-bold mt-1 text-siap-dark">Akses Aplikasi</a>
+            <!-- Teks kapital dua baris di mobile menu -->
+            <div class="text-center text-[0.6rem] font-bold uppercase text-emerald-800 pt-2 leading-tight">
+                <div>SISTEM INFORMASI ADMINISTRASI PERTANAHAN</div>
+                <div>NORMALISASI SUNGAI</div>
+            </div>
+        </div>
+    </nav>
+
+<!-- HERO SECTION dengan posisi preview yang benar -->
+<section id="home" class="hero-gradient pt-32 pb-16 md:pt-40 md:pb-24 overflow-hidden">
+    <div class="container mx-auto px-6">
+        <div class="flex flex-col lg:flex-row items-center gap-12">
+            <!-- Kolom kiri: teks -->
+            <div class="flex-1 text-center lg:text-left">
+                <div class="inline-flex items-center gap-2 bg-white/70 backdrop-blur-sm rounded-full px-4 py-1.5 text-emerald-700 text-sm font-semibold mb-5 border border-green-200/60">
+                    <i class="fas fa-map-marked-alt text-emerald-500"></i> SIG Pertanahan & Normalisasi Sungai
+                </div>
+                <h1 class="text-4xl md:text-5xl lg:text-6xl font-extrabold leading-tight tracking-tight text-gray-900">
+                    Kelola Data Tanah <br> <span class="bg-gradient-to-r from-emerald-700 to-blue-600 bg-clip-text text-transparent">Normalisasi Sungai</span> <br> Secara Digital
+                </h1>
+                <p class="text-gray-700 text-lg mt-6 max-w-2xl mx-auto lg:mx-0">
+                    SIAP-SUNGAI adalah platform terpadu untuk administrasi pertanahan, pemetaan lokasi terdampak normalisasi sungai, monitoring sertipikat, dan laporan spasial. Dikelola secara transparan & efisien.
+                </p>
+                <div class="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start mt-8">
+                    <a href="aplikasi_siap_sungai.html" target="_blank" class="btn-gradient-primary px-8 py-3 rounded-full font-bold shadow-xl flex items-center justify-center gap-2">
+                        <i class="fas fa-rocket"></i> Buka Aplikasi
+                    </a>
+                    <a href="#fitur" class="border border-emerald-300 bg-white/60 text-emerald-800 px-7 py-3 rounded-full font-medium hover:bg-emerald-50 transition flex items-center justify-center gap-2">
+                        <i class="fas fa-info-circle"></i> Eksplor Fitur
+                    </a>
+                </div>
+                <div class="flex flex-wrap gap-5 justify-center lg:justify-start mt-10 text-gray-600 text-sm">
+                    <div class="flex items-center gap-2"><i class="fas fa-chart-pie text-emerald-500"></i> Dashboard Analitik</div>
+                    <div class="flex items-center gap-2"><i class="fas fa-map-marked-alt text-blue-500"></i> Peta Interaktif</div>
+                    <div class="flex items-center gap-2"><i class="fas fa-file-excel text-green-600"></i> Ekspor Excel/KML</div>
+                    <div class="flex items-center gap-2"><i class="fas fa-camera-retro text-amber-500"></i> Unggah Foto</div>
+                </div>
+            </div>
+
+            <!-- Kolom kanan: preview aplikasi -->
+            <div class="flex-1 flex justify-center">
+                <div class="relative w-full max-w-lg">
+                    <div class="bg-white rounded-2xl shadow-2xl p-3 border border-gray-200 rotate-1 hover:rotate-0 transition duration-500 overflow-hidden">
+                        <div class="bg-gradient-to-r from-emerald-600 to-blue-600 rounded-t-xl px-4 py-2 flex items-center gap-1.5">
+                            <div class="w-3 h-3 rounded-full bg-red-400"></div>
+                            <div class="w-3 h-3 rounded-full bg-yellow-400"></div>
+                            <div class="w-3 h-3 rounded-full bg-green-400"></div>
+                            <span class="text-white text-xs ml-2 font-medium">siap-sungai.app/dashboard</span>
+                        </div>
+                        <div class="bg-white rounded-b-xl overflow-hidden">
+                            <img src="https://res.cloudinary.com/de4prnqa4/image/upload/v1780246533/ss_aplikasi_sungai_tbsdvl.png" alt="Dashboard SIAP-SUNGAI" class="w-full h-auto block" loading="lazy">
+                        </div>
+                    </div>
+                    <div class="absolute -bottom-6 -left-6 w-44 h-44 bg-gradient-to-r from-siap-pink/40 to-siap-blue/30 rounded-full blur-2xl -z-10"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>    </section>
+
+    <!-- TENTANG & MAKSUD -->
+    <section id="tentang" class="py-20 bg-white">
+        <div class="container mx-auto px-6">
+            <div class="text-center max-w-3xl mx-auto mb-10">
+                <span class="section-badge"><i class="fas fa-droplet mr-1"></i> Solusi Cerdas Pertanahan</span>
+                <h2 class="text-3xl md:text-4xl font-bold text-gray-800 mt-3">Mengapa SIAP-SUNGAI?</h2>
+                <div class="w-20 h-1 bg-gradient-to-r from-siap-green to-siap-blue mx-auto mt-3 rounded-full"></div>
+                <p class="text-lg text-gray-700 mt-4">Menyediakan basis data tanah yang terdampak proyek normalisasi sungai secara digital, akurat, dan mudah diakses untuk pengambilan keputusan.</p>
+            </div>
+            <div class="grid md:grid-cols-3 gap-8">
+                <div class="feature-card-siap p-6 rounded-2xl">
+                    <div class="w-14 h-14 bg-gradient-to-br from-siap-green to-siap-blue rounded-xl flex items-center justify-center mb-5 text-white text-2xl"><i class="fas fa-database"></i></div>
+                    <h3 class="text-xl font-bold">Pusat Data Sertipikat</h3>
+                    <p class="text-gray-600 mt-2">Catatan lengkap hak milik, nomor berkas, luas tanah, status kepemilikan, dan catatan khusus tiap bidang tanah.</p>
+                </div>
+                <div class="feature-card-siap p-6 rounded-2xl">
+                    <div class="w-14 h-14 bg-gradient-to-br from-siap-pink to-siap-yellow rounded-xl flex items-center justify-center mb-5 text-siap-dark text-2xl"><i class="fas fa-chart-line"></i></div>
+                    <h3 class="text-xl font-bold">Monitoring & Status</h3>
+                    <p class="text-gray-600 mt-2">Pantau progres penerbitan sertipikat, pengambilan dokumen, dan analisis kelayakan lahan lewat dashboard realtime.</p>
+                </div>
+                <div class="feature-card-siap p-6 rounded-2xl">
+                    <div class="w-14 h-14 bg-gradient-to-br from-siap-blue to-siap-purple rounded-xl flex items-center justify-center mb-5 text-white text-2xl"><i class="fas fa-globe-asia"></i></div>
+                    <h3 class="text-xl font-bold">Pemetaan Spasial Terintegrasi</h3>
+                    <p class="text-gray-600 mt-2">Visualisasi persebaran lahan dalam peta interaktif (OpenStreetMap & Satelit) + export KML untuk Google Earth.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FITUR LENGKAP -->
+    <section id="fitur" class="py-20 bg-siap-cream/50">
+        <div class="container mx-auto px-6">
+            <div class="text-center max-w-2xl mx-auto mb-12">
+                <span class="section-badge"><i class="fas fa-cog"></i> Fitur Komprehensif</span>
+                <h2 class="text-3xl md:text-4xl font-bold text-gray-800 mt-2">Segala yang Anda Butuhkan</h2>
+                <p class="text-gray-700 mt-3">Dari input data hingga peta interaktif dan laporan otomatis</p>
+            </div>
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-7">
+                <div class="feature-card-siap rounded-2xl p-6 shadow-sm border border-white/30">
+                    <i class="fas fa-pen-alt text-3xl text-emerald-600 mb-3"></i>
+                    <h4 class="text-xl font-bold">CRUD Data Tanah</h4>
+                    <p class="text-gray-600 mt-2">Formulir lengkap: nama pemegang hak, desa, luas tanah, nomor hak milik, tahun daftar, status (SUDAH JADI/PROSES/BELUM DAFTAR), dan koordinat geografis.</p>
+                </div>
+                <div class="feature-card-siap rounded-2xl p-6 shadow-sm">
+                    <i class="fas fa-layer-group text-3xl text-indigo-500 mb-3"></i>
+                    <h4 class="text-xl font-bold">Filter & Rekap Dinamis</h4>
+                    <p class="text-gray-600 mt-2">Filter berdasarkan desa, status, pengambilan sertipikat, dan pencarian universal. Tabel responsif dengan total terfilter.</p>
+                </div>
+                <div class="feature-card-siap rounded-2xl p-6 shadow-sm">
+                    <i class="fas fa-map-marked-alt text-3xl text-cyan-500 mb-3"></i>
+                    <h4 class="text-xl font-bold">Peta Interaktif Leaflet</h4>
+                    <p class="text-gray-600 mt-2">Marka warna berdasarkan status lahan (hijau, kuning, merah), layer satelit/OSM, klik popup info lengkap, navigasi GPS.</p>
+                </div>
+                <div class="feature-card-siap rounded-2xl p-6 shadow-sm">
+                    <i class="fas fa-file-export text-3xl text-green-600 mb-3"></i>
+                    <h4 class="text-xl font-bold">Ekspor & Impor Data</h4>
+                    <p class="text-gray-600 mt-2">Ekspor ke Excel (XLSX), Backup JSON, Restore data, Impor dari Excel/KML. Dukungan penuh untuk migrasi data.</p>
+                </div>
+                <div class="feature-card-siap rounded-2xl p-6 shadow-sm">
+                    <i class="fas fa-camera-retro text-3xl text-amber-600 mb-3"></i>
+                    <h4 class="text-xl font-bold">Multi Foto & Kamera</h4>
+                    <p class="text-gray-600 mt-2">Unggah multiple foto bukti lahan via galeri, atau ambil langsung lewat kamera (integrasi Cloudinary). Preview foto & hapus.</p>
+                </div>
+                <div class="feature-card-siap rounded-2xl p-6 shadow-sm">
+                    <i class="fas fa-history text-3xl text-purple-500 mb-3"></i>
+                    <h4 class="text-xl font-bold">Log Aktivitas Lengkap</h4>
+                    <p class="text-gray-600 mt-2">Catatan setiap aksi (TAMBAH, EDIT, HAPUS, LOGIN) dengan waktu, perangkat, pengguna. Filter & hapus log memudahkan audit trail.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- PRATINJAU APLIKASI -->
+    <section id="demo" class="py-20 bg-white">
+        <div class="container mx-auto px-6">
+            <div class="text-center max-w-3xl mx-auto mb-10">
+                <span class="section-badge"><i class="fas fa-desktop"></i> Antarmuka Aplikasi</span>
+                <h2 class="text-3xl font-bold mt-2">Lihat bagaimana SIAP-SUNGAI bekerja</h2>
+                <p class="text-gray-600 mt-2">Dashboard analitik, peta sebaran, dan manajemen data dalam satu ekosistem</p>
+            </div>
+            <div class="grid md:grid-cols-2 gap-8 items-center">
+                <div class="mockup-card p-4 rounded-2xl shadow-xl">
+                    <img src="https://res.cloudinary.com/de4prnqa4/image/upload/v1780246629/ss_aplikasi_sungai2_iq5lro.png" alt="Preview Peta SIAP-SUNGAI" class="rounded-xl w-full shadow-md border border-white/30">
+                    <div class="mt-3 flex justify-between text-xs text-gray-500"><span><i class="fas fa-map-pin text-rose-400"></i> 120+ titik tanah</span><span>Layer Satelit</span></div>
+                </div>
+                <div class="space-y-4">
+                    <div class="flex gap-4 items-start">
+                        <div class="w-10 h-10 rounded-full bg-siap-green flex items-center justify-center text-white"><i class="fas fa-chart-simple"></i></div>
+                        <div><h4 class="font-bold">Dashboard Statistik Cerdas</h4><p class="text-gray-600">Diagram status sertipikat, perbandingan desa, total luas lahan, grafik donut & batang realtime.</p></div>
+                    </div>
+                    <div class="flex gap-4 items-start">
+                        <div class="w-10 h-10 rounded-full bg-siap-blue flex items-center justify-center text-white"><i class="fas fa-table"></i></div>
+                        <div><h4 class="font-bold">Rekapan & Filter Dinamis</h4><p class="text-gray-600">Tabel data lengkap dengan pencarian cepat, filter status dan desa, mendukung scroll massal.</p></div>
+                    </div>
+                    <div class="flex gap-4 items-start">
+                        <div class="w-10 h-10 rounded-full bg-siap-purple flex items-center justify-center text-white"><i class="fas fa-cloud-upload-alt"></i></div>
+                        <div><h4 class="font-bold">Backup & Restore Data</h4><p class="text-gray-600">Ekspor penuh ke JSON, impor dari Excel/KML, aman dan portabel.</p></div>
+                    </div>
+                </div>
+            </div>
+            <div class="mt-12 text-center">
+                <a href="aplikasi_siap_sungai.html" target="_blank" class="inline-flex items-center gap-2 btn-gradient-primary px-8 py-3 rounded-full font-bold shadow-lg"><i class="fas fa-arrow-right-to-bracket"></i> Akses Aplikasi Sekarang</a>
+                <p class="text-xs text-gray-500 mt-3">*Akses penuh ke modul kelola data, peta, log, dan ekspor. Login dengan nama pengguna apapun.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- STATISTIK & KEY METRICS -->
+    <section class="py-16 bg-siap-cream/60">
+        <div class="container mx-auto px-6">
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-6 text-center">
+                <div><i class="fas fa-database text-4xl text-siap-blue mb-2"></i><div class="stat-number text-3xl">185+</div><div class="font-medium">Data Tanah</div></div>
+                <div><i class="fas fa-location-dot text-4xl text-emerald-500 mb-2"></i><div class="stat-number text-3xl">4</div><div class="font-medium">Desa Terdaftar</div></div>
+                <div><i class="fas fa-map text-4xl text-amber-500 mb-2"></i><div class="stat-number text-3xl">100%</div><div class="font-medium">Peta Spasial</div></div>
+                <div><i class="fas fa-chart-line text-4xl text-purple-500 mb-2"></i><div class="stat-number text-3xl">24/7</div><div class="font-medium">Akses Online</div></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- TESTIMONI -->
+    <section class="py-16 bg-white">
+        <div class="container mx-auto px-6 text-center max-w-4xl">
+            <i class="fas fa-quote-left text-4xl text-siap-green mb-4 opacity-70"></i>
+            <p class="text-xl text-gray-700 italic">“SIAP-SUNGAI telah membantu aparatur desa & dinas pekerjaan umum dalam memetakan aset tanah di wilayah normalisasi sungai. Proses pendataan yang dulu manual kini digital, akurat, dan mudah dilaporkan.”</p>
+            <div class="mt-6 flex justify-center items-center gap-2">
+                <div class="w-10 h-10 rounded-full bg-siap-yellow flex items-center justify-center font-bold">I</div>
+                <div class="text-left"><div class="font-bold">Ianz / Bidang Pertanahan</div><div class="text-xs text-gray-500">Dinas Perumahan & Kawasan Permukiman Kabupaten Bima</div></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="border-t border-siap-yellow bg-white/50 backdrop-blur-sm">
+        <div class="container mx-auto px-6 py-10 flex flex-col md:flex-row justify-between items-center gap-4">
+            <div class="flex items-center gap-2">
+                <div class="logo-icon w-12 h-12">
+                    <img src="https://res.cloudinary.com/de4prnqa4/image/upload/v1780235014/logo_app_sungai_rcujav.jpg" alt="Logo SIAP-SUNGAI">
+                </div>
+                <span class="font-bold text-gray-800">SIAP-SUNGAI <span class="text-xs font-normal">| Admin Pertanahan</span></span>
+            </div>
+            <div class="flex gap-6 text-sm text-gray-600">
+                <a href="#home" class="hover:text-emerald-600">Beranda</a>
+                <a href="#fitur" class="hover:text-emerald-600">Fitur</a>
+                <a href="aplikasi_siap_sungai.html" target="_blank" class="hover:text-emerald-600">Akses Aplikasi</a>
+            </div>
+            <div class="text-xs text-gray-400">Dikembangkan untuk mendukung normalisasi sungai & pengelolaan aset tanah | © 2026</div>
+        </div>
+    </footer>
+
+    <script>
+        // Mobile menu toggle
+        const mobileBtn = document.getElementById('mobileMenuBtn');
+        const mobileMenu = document.getElementById('mobileMenu');
+        if (mobileBtn) mobileBtn.addEventListener('click', () => mobileMenu.classList.toggle('hidden'));
+
+        // Smooth scroll dengan offset untuk navbar fixed
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target && this.getAttribute('href') !== '#' && this.getAttribute('href') !== 'javascript:void(0)') {
+                    e.preventDefault();
+                    const yOffset = -85;
+                    const y = target.getBoundingClientRect().top + window.pageYOffset + yOffset;
+                    window.scrollTo({ top: y, behavior: 'smooth' });
+                    if (mobileMenu && !mobileMenu.classList.contains('hidden')) mobileMenu.classList.add('hidden');
+                }
+            });
+        });
+    </script>
+</body>
+</html>
